@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+    <title>Evasores Fiscales - Launcher</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Spinner de carga -->
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="spinner"></div>
+            <p>Comprobando sesión...</p>
+        </div>
+
+        <header>
+            <div class="logo">
+                <h1>Evasores Fiscales</h1>
+                <div class="ip-container">
+                    <p>evasoresfiscales.holy.gg</p>
+                    <button id="copy-ip-btn" class="copy-ip-btn">Copiar IP</button>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="server-status">
+                    <span id="status-dot" class="status-dot"></span>
+                    <span id="status-text" class="status-text">Pingeando...</span>
+                </div>
+
+                <!-- Contenedor del menú de usuario (cuando se ha iniciado sesión) -->
+                <div id="user-menu-container" class="user-menu-container hidden">
+                    <img id="user-avatar" src="" alt="Avatar">
+                    <div id="user-dropdown" class="user-dropdown hidden">
+                        <div id="user-name" class="dropdown-user-name"></div>
+                        <button id="logout-btn" class="logout-btn">Cerrar Sesión</button>
+                    </div>
+                </div>
+    
+                <!-- Botón de Login (cuando no se ha iniciado sesión) -->
+                <button id="login-btn" class="login-button hidden">
+                    <img src="assets/microsoft-logo.png" alt="Microsoft Logo" class="microsoft-logo">
+                    <span>Iniciar Sesión</span>
+                </button>
+
+                <!-- Botón de Ajustes -->
+                <button id="settings-btn" class="settings-btn">Ajustes</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="main-content">
+                <!-- El contenedor de noticias se llenará dinámicamente -->
+                <div id="news-container" class="news-container"></div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="action-panel">
+                <div class="progress-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                    <span id="progress-text"></span>
+                </div>
+                <button id="play-btn" class="play-button" disabled>Jugar</button>
+            </div>
+            <p class="footer-text">Launcher v1.0.0 | Minecraft 1.20.1 (Fabric) | Servidor Evasores Fiscales</p>
+        </footer>
+    </div>
+    <div id="settings-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>Ajustes</h2>
+            <div class="setting-item">
+                <label for="ram-max">Memoria RAM Máxima (GB)</label>
+                <input type="number" id="ram-max" min="2" max="32" step="1" value="6">
+            </div>
+            <div class="setting-item">
+                <label for="ram-min">Memoria RAM Mínima (GB)</label>
+                <input type="number" id="ram-min" min="1" max="16" step="1" value="4">
+            </div>
+            <div class="setting-item">
+                <button id="open-launcher-folder-btn" class="secondary-btn">Abrir carpeta del launcher</button>
+            </div>
+            <div class="setting-item">
+                <label>Acciones de Mantenimiento</label>
+                <button id="reinstall-mods-btn" class="destructive-btn">Borrar Caché y Reinstalar Mods</button>
+            </div>
+            <div class="modal-actions">
+                <button id="save-settings-btn">Guardar y Cerrar</button>
+                <button id="close-settings-btn" class="secondary-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="renderer.js"></script>
+</body>
+</html>
