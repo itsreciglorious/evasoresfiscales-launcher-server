@@ -18,7 +18,7 @@ Este es el repositorio del launcher personalizado para el servidor de Minecraft 
 2.  Descarga el archivo `.exe` de la última versión (por ejemplo, `Evasores Fiscales Launcher Setup X.Y.Z.exe`).
 3.  Ejecuta el instalador y sigue las instrucciones. ¡Listo!
 
-## 🛠️ Configuración para Desarrollo
+## Configuración para Desarrollo
 
 Si quieres modificar o contribuir al código del launcher, sigue estos pasos:
 
@@ -84,5 +84,6 @@ Cuando realices cambios en el código del launcher (por ejemplo, en la interfaz 
     -   Crea una nueva release con el tag correspondiente a la nueva versión (ej. `v1.0.1`).
     -   Sube **todos** los archivos generados en la carpeta `dist/` a la release.
     -   Publica la release.
+
 
 El sistema de `electron-updater` detectará la nueva versión y notificará a los usuarios para que actualicen.
