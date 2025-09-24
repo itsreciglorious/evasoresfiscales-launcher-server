@@ -1,0 +1,25 @@
+# Dependencias de Node.js
+/node_modules
+
+# Archivos de compilación y empaquetado
+/dist
+
+# Directorio de datos del juego del usuario
+# (¡MUY IMPORTANTE! No subir los datos de Minecraft de los usuarios)
+/.evasoresfiscales
+
+# Archivos de log
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración del editor de código (opcional pero recomendado)
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
