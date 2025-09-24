@@ -64,15 +64,6 @@ Si quieres modificar o contribuir al código del launcher, sigue estos pasos:
 -   `package.json`: Define el proyecto, sus dependencias y los scripts para ejecutar y compilar.
 -   `build/`: Contiene los recursos para la compilación, como el icono de la aplicación.
 
-## Configuración y Actualización de Contenido
-
-El contenido dinámico del launcher (mods y noticias) se gestiona a través de dos archivos JSON en un repositorio separado:
-
--   **`mods.json`**: Define la lista de mods, sus versiones y URLs de descarga. El launcher sincroniza la carpeta de mods del usuario con este archivo cada vez que se inicia.
--   **`news.json`**: Contiene las noticias que se muestran en la pantalla principal.
-
-Para actualizar los mods o las noticias, simplemente modifica estos archivos en su repositorio y el launcher de los jugadores se actualizará automáticamente en el siguiente inicio.
-
 ## Publicar una Nueva Versión del Launcher
 
 Cuando realices cambios en el código del launcher (por ejemplo, en la interfaz o en su funcionalidad), sigue estos pasos para publicar una actualización:
@@ -87,3 +78,4 @@ Cuando realices cambios en el código del launcher (por ejemplo, en la interfaz 
 
 
 El sistema de `electron-updater` detectará la nueva versión y notificará a los usuarios para que actualicen.
+
