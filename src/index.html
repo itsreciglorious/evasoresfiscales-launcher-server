@@ -63,30 +63,131 @@
                 </div>
                 <button id="play-btn" class="play-button" disabled>Jugar</button>
             </div>
-            <p class="footer-text">Launcher v1.0.0 | Minecraft 1.20.1 (Fabric) | Servidor Evasores Fiscales</p>
+            <p class="footer-text">Launcher v1.0.1 | Minecraft 1.20.1 (Fabric) | Servidor Evasores Fiscales</p>
         </footer>
     </div>
     <div id="settings-modal" class="modal-overlay hidden">
         <div class="modal-content">
-            <h2>Ajustes</h2>
-            <div class="setting-item">
-                <label for="ram-max">Memoria RAM Máxima (GB)</label>
-                <input type="number" id="ram-max" min="2" max="32" step="1" value="6">
+            <div class="modal-header">
+                <h2>Configuración del Launcher</h2>
+                <button id="close-settings-btn" class="close-btn">&times;</button>
             </div>
-            <div class="setting-item">
-                <label for="ram-min">Memoria RAM Mínima (GB)</label>
-                <input type="number" id="ram-min" min="1" max="16" step="1" value="4">
+            
+            <div class="settings-tabs">
+                <button class="tab-btn active" data-tab="general">General</button>
+                <button class="tab-btn" data-tab="performance">Rendimiento</button>
+                <button class="tab-btn" data-tab="maintenance">Mantenimiento</button>
             </div>
-            <div class="setting-item">
-                <button id="open-launcher-folder-btn" class="secondary-btn">Abrir carpeta del launcher</button>
+
+            <!-- Pestaña General -->
+            <div id="general-tab" class="tab-content active">
+                <div class="setting-item">
+                    <label for="java-path">Ruta de Java</label>
+                    <div class="input-with-btn">
+                        <input type="text" id="java-path" placeholder="Automático" readonly>
+                        <button type="button" id="browse-java-btn" class="browse-btn">Examinar</button>
+                    </div>
+                    <small>Se recomienda usar Java 17. Se detectará automáticamente.</small>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="game-directory">Directorio del Juego</label>
+                    <div class="input-with-btn">
+                        <input type="text" id="game-directory" value="C:\Users\%USERNAME%\AppData\Roaming\.evasoresfiscales" readonly>
+                        <button type="button" id="browse-game-dir-btn" class="browse-btn">Cambiar</button>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="launcher-theme">Tema del Launcher</label>
+                    <select id="launcher-theme">
+                        <option value="dark">Oscuro (Por defecto)</option>
+                        <option value="light">Claro</option>
+                        <option value="blue">Azul</option>
+                    </select>
+                </div>
             </div>
-            <div class="setting-item">
-                <label>Acciones de Mantenimiento</label>
-                <button id="reinstall-mods-btn" class="destructive-btn">Borrar Caché y Reinstalar Mods</button>
+
+            <!-- Pestaña Rendimiento -->
+            <div id="performance-tab" class="tab-content">
+                <div class="setting-item">
+                    <label for="ram-max">Memoria RAM Máxima (GB)</label>
+                    <div class="slider-container">
+                        <input type="range" id="ram-max-slider" min="2" max="16" step="1" value="6">
+                        <span id="ram-max-value">6 GB</span>
+                    </div>
+                    <input type="number" id="ram-max" min="2" max="32" step="1" value="6" class="number-input">
+                    <small id="ram-warning" class="warning hidden">La RAM máxima no puede ser menor que la mínima</small>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="ram-min">Memoria RAM Mínima (GB)</label>
+                    <div class="slider-container">
+                        <input type="range" id="ram-min-slider" min="1" max="8" step="1" value="4">
+                        <span id="ram-min-value">4 GB</span>
+                    </div>
+                    <input type="number" id="ram-min" min="1" max="16" step="1" value="4" class="number-input">
+                </div>
+                
+                <div class="memory-info">
+                    <h4>Información del Sistema</h4>
+                    <div class="system-stats">
+                        <span>RAM Total: <strong id="total-ram">-</strong></span>
+                        <span>RAM Disponible: <strong id="available-ram">-</strong></span>
+                        <span>RAM Recomendada: <strong id="recommended-ram">4-6 GB</strong></span>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="jvm-args">Argumentos JVM Adicionales</label>
+                    <textarea id="jvm-args" placeholder="-XX:+UseG1GC -XX:MaxGCPauseMillis=50" rows="3"></textarea>
+                    <small>Argumentos avanzados para la JVM (opcional)</small>
+                </div>
             </div>
+
+            <!-- Pestaña Mantenimiento -->
+            <div id="maintenance-tab" class="tab-content">
+                <div class="setting-item">
+                    <label>Gestión de Archivos</label>
+                    <button id="open-launcher-folder-btn" class="action-btn">
+                        Abrir carpeta del launcher
+                    </button>
+                    <button id="open-mods-folder-btn" class="action-btn">
+                        Abrir carpeta de mods
+                    </button>
+                    <button id="open-logs-folder-btn" class="action-btn">
+                        Ver archivos de log
+                    </button>
+                </div>
+                
+                <div class="setting-item">
+                    <label>Limpieza y Reparación</label>
+                    <button id="clear-cache-btn" class="action-btn warning">
+                        Limpiar caché de Minecraft
+                    </button>
+                    <button id="reinstall-mods-btn" class="action-btn destructive">
+                        Reinstalar todos los mods
+                    </button>
+                    <button id="verify-files-btn" class="action-btn">
+                        Verificar archivos del juego
+                    </button>
+                    <button id="diagnose-mods-btn" class="action-btn">
+                        Diagnosticar Mods
+                    </button>
+                </div>
+                
+                <div class="setting-item">
+                    <label>Configuración de Cuenta</label>
+                    <button id="clear-account-btn" class="action-btn destructive">
+                        Cerrar sesión y limpiar datos
+                    </button>
+                    <small>Elimina todos los datos de inicio de sesión</small>
+                </div>
+            </div>
+
             <div class="modal-actions">
-                <button id="save-settings-btn">Guardar y Cerrar</button>
-                <button id="close-settings-btn" class="secondary-btn">Cancelar</button>
+                <button id="reset-settings-btn" class="secondary-btn">Restablecer</button>
+                <button id="save-settings-btn" class="primary-btn">💾 Guardar Configuración</button>
             </div>
         </div>
     </div>
