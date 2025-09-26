@@ -1,6 +1,6 @@
 {
   "name": "minecraft-custom-launcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Launcher personalizado para Evasores Fiscales",
   "main": "main.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/itsreciglorious/evasoresfiscales-launcher-server.git"
+    "url": "https://github.com/itsreciglorious/evasoresfiscales-launcher-server"
   },
   "author": "ericglorious",
   "license": "MIT",
@@ -18,11 +18,14 @@
     "electron-builder": "^24.13.3"
   },
   "dependencies": {
+    "adm-zip": "^0.5.16",
     "axios": "^1.7.2",
+    "electron-log": "^4.4.8",
     "electron-updater": "^6.6.2",
     "minecraft-launcher-core": "^3.16.2",
     "minecraft-server-util": "^5.4.4",
-    "msmc": "^4.1.0"
+    "msmc": "^4.1.0",
+    "tar": "^6.2.1"
   },
   "keywords": [],
   "build": {
@@ -32,7 +35,9 @@
       "**/*"
     ],
     "publish": {
-      "provider": "github"
+      "provider": "github",
+      "owner": "itsreciglorious",
+      "repo": "evasoresfiscales-launcher-server"
     },
     "win": {
       "icon": "build/icons/icon.ico"
