@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const ramMaxSlider = document.getElementById('ram-max-slider');
     const ramMinSlider = document.getElementById('ram-min-slider');
     const ramWarning = document.getElementById('ram-warning');
+    const launcherThemeSelect = document.getElementById('launcher-theme');
 
     // === INICIALIZACIÓN ===
     initializeApp();
@@ -62,6 +63,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Nuevos botones de ajustes
         setupSettingsButtons();
+
+        // Selector de tema
+        launcherThemeSelect.addEventListener('change', (e) => applyTheme(e.target.value));
         
         // Eventos de Electron
         setupElectronEvents();
@@ -218,6 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
         await loadNews();
         await checkAuthState();
         await updateSystemInfo();
+        await loadAndApplyTheme();
     }
 
     async function checkServerStatus() {
@@ -380,12 +385,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const newSettings = {
             ram: { 
                 max: document.getElementById('ram-max').value, 
-                min: document.getElementById('ram-min').value 
-            }
+                min: document.getElementById('ram-min').value
+            },
+            theme: launcherThemeSelect.value
         };
         
         try {
             await window.electronAPI.setSettings(newSettings);
+            applyTheme(newSettings.theme);
             showNotification('Ajustes guardados correctamente', 'success');
             closeSettings();
         } catch (error) {
@@ -401,6 +408,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('ram-min').value = settings.ram.min;
             document.getElementById('ram-max-slider').value = settings.ram.max;
             document.getElementById('ram-min-slider').value = settings.ram.min;
+            launcherThemeSelect.value = settings.theme || 'dark';
             initializeRAMSliders(); // Para actualizar los valores
         } catch (error) {
             console.error('Error loading settings:', error);
@@ -420,6 +428,21 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error('Error getting system info:', error);
         }
+    }
+
+    // === GESTIÓN DE TEMAS ===
+
+    function applyTheme(themeName) {
+        document.body.className = ''; // Limpiar clases de tema anteriores
+        if (themeName !== 'dark') { // 'dark' es el predeterminado, no necesita clase
+            document.body.classList.add(`theme-${themeName}`);
+        }
+    }
+
+    async function loadAndApplyTheme() {
+        const settings = await window.electronAPI.getSettings();
+        const theme = settings.theme || 'dark';
+        applyTheme(theme);
     }
 
     // === GESTIÓN DE INTERFAZ DE USUARIO ===
